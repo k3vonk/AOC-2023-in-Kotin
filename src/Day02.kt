@@ -1,29 +1,29 @@
 fun main() {
-
     fun String.toColorAndCountPairs() =
-            trim()
-                .replace(";", ",") // sets do not matter, we only care about the Num - Color.
-                .split(",")
-                .map {
-                    val (count, color) = it.trim().split(" ")
-                    color to count.toInt()
-                }
+        trim()
+            .replace(";", ",") // sets do not matter, we only care about the Num - Color.
+            .split(",")
+            .map {
+                val (count, color) = it.trim().split(" ")
+                color to count.toInt()
+            }
 
     fun String.possibleGame(): Int {
         val (gameId, rawSets) = split(":")
         val id = gameId.substringAfter("Game ").toInt()
 
         val colorCountPairs = rawSets.toColorAndCountPairs()
-        val isWithinPossibilities = colorCountPairs.all { (color, count) ->
-            when(color) {
-                "red" -> count <= 12
-                "green" -> count <= 13
-                "blue" -> count <= 14
-                else -> false
+        val isWithinPossibilities =
+            colorCountPairs.all { (color, count) ->
+                when (color) {
+                    "red" -> count <= 12
+                    "green" -> count <= 13
+                    "blue" -> count <= 14
+                    else -> false
+                }
             }
-        }
 
-        return if(isWithinPossibilities) id else 0
+        return if (isWithinPossibilities) id else 0
     }
 
     fun String.powerSet(): Int {
@@ -42,7 +42,7 @@ fun main() {
 
     fun part2(input: List<String>): Int = input.sumOf { it.powerSet() }
 
-    val input = readInput("data/DAY02")
+    val input = readInput("DAY02")
     println("Part 1: ${part1(input)}")
     println("Part 2: ${part2(input)}")
 }
