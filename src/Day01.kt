@@ -1,5 +1,4 @@
 fun main() {
-
     val stringToNumber =
         mapOf(
             "one" to "1",
