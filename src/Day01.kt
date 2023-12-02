@@ -1,13 +1,4 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        var sum = 0
-        input.forEach {
-            val first = it.find { char -> char.isDigit() }.toString()
-            val last = it.findLast { char -> char.isDigit() }
-            sum += (first + last).toInt()
-        }
-        return sum
-    }
 
     val stringToNumber =
         mapOf(
@@ -24,24 +15,28 @@ fun main() {
 
     val numbers = stringToNumber.values + stringToNumber.keys
 
-    fun convertStringToNumber(p: Pair<Int, String>?) =
-        if (p!!.second in stringToNumber) {
-            stringToNumber[p.second]
+    fun Pair<Int, String>.convertStringToNumber() =
+        if (second in stringToNumber) {
+            stringToNumber[second]
         } else {
-            p.second
+            second
         }
 
-    fun part2(input: List<String>): Int {
-        var sum = 0
-        input.forEach { line ->
-            val first = convertStringToNumber(line.findAnyOf(numbers))
-            val last = convertStringToNumber(line.findLastAnyOf(numbers))
-            sum += (first + last).toInt()
+    fun part1(input: List<String>) =
+        input.sumOf {
+            val first = it.find { char -> char.isDigit() }.toString()
+            val second = it.findLast { char -> char.isDigit() }.toString()
+            (first + second).toInt()
         }
-        return sum
-    }
 
-    val input = readInput("data/DAY01")
-    part1(input).println()
-    part2(input).println()
+    fun part2(input: List<String>) =
+        input.sumOf {
+            val first = it.findAnyOf(numbers)!!.convertStringToNumber()
+            val second = it.findLastAnyOf(numbers)!!.convertStringToNumber()
+            (first + second).toInt()
+        }
+
+    val input = readInput("DAY01")
+    println("Part 1: ${part1(input)}")
+    println("Part 2: ${part2(input)}")
 }
