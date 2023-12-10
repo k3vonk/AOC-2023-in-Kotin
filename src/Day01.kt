@@ -14,26 +14,23 @@ fun main() {
 
     val numbers = stringToNumber.values + stringToNumber.keys
 
-    fun Pair<Int, String>.convertStringToNumber() =
-        if (second in stringToNumber) {
-            stringToNumber[second]
-        } else {
-            second
-        }
+    fun Pair<Int, String>.convertStringToNumber() = if (second in stringToNumber) {
+        stringToNumber[second]
+    } else {
+        second
+    }
 
-    fun part1(input: List<String>) =
-        input.sumOf {
-            val first = it.find { char -> char.isDigit() }.toString()
-            val second = it.findLast { char -> char.isDigit() }.toString()
-            (first + second).toInt()
-        }
+    fun part1(input: List<String>) = input.sumOf {
+        val first = it.find { char -> char.isDigit() }.toString()
+        val second = it.findLast { char -> char.isDigit() }.toString()
+        (first + second).toInt()
+    }
 
-    fun part2(input: List<String>) =
-        input.sumOf {
-            val first = it.findAnyOf(numbers)!!.convertStringToNumber()
-            val second = it.findLastAnyOf(numbers)!!.convertStringToNumber()
-            (first + second).toInt()
-        }
+    fun part2(input: List<String>) = input.sumOf {
+        val first = it.findAnyOf(numbers)!!.convertStringToNumber()
+        val second = it.findLastAnyOf(numbers)!!.convertStringToNumber()
+        (first + second).toInt()
+    }
 
     val input = readInput("DAY01")
     println("Part 1: ${part1(input)}")

@@ -13,11 +13,7 @@ fun main() {
 
     val foundStars = mutableMapOf<String, List<Int>>()
 
-    fun adjacentSymbolLocation(
-        i: Int,
-        j: Int,
-        matrix: List<List<Char>>,
-    ): Pair<Int, Int>? {
+    fun adjacentSymbolLocation(i: Int, j: Int, matrix: List<List<Char>>): Pair<Int, Int>? {
         directions.forEach { direction ->
             val newI = i + direction.first
             val newJ = j + direction.second
@@ -35,10 +31,7 @@ fun main() {
         return null
     }
 
-    fun updateFoundStars(
-        foundStarLocation: String,
-        numberString: Int,
-    ) {
+    fun updateFoundStars(foundStarLocation: String, numberString: Int) {
         if (foundStarLocation.isNotBlank()) {
             foundStars[foundStarLocation] =
                 (foundStars[foundStarLocation] ?: emptyList()) + listOf(numberString)
@@ -90,10 +83,9 @@ fun main() {
 
     fun List<Int>.getProduct() = reduce { acc, s -> acc * s }
 
-    fun part2() =
-        foundStars
-            .map { (_, values) -> if (values.size > 1) values.getProduct() else 0 }
-            .sumOf { it }
+    fun part2() = foundStars
+        .map { (_, values) -> if (values.size > 1) values.getProduct() else 0 }
+        .sumOf { it }
 
     val input = readInput("DAY03")
     val matrix: List<List<Char>> = input.map { line -> line.map { it } }

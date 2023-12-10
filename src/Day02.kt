@@ -1,12 +1,11 @@
 fun main() {
-    fun String.toColorAndCountPairs() =
-        trim()
-            .replace(";", ",") // sets do not matter, we only care about the Num - Color.
-            .split(",")
-            .map {
-                val (count, color) = it.trim().split(" ")
-                color to count.toInt()
-            }
+    fun String.toColorAndCountPairs() = trim()
+        .replace(";", ",") // sets do not matter, we only care about the Num - Color.
+        .split(",")
+        .map {
+            val (count, color) = it.trim().split(" ")
+            color to count.toInt()
+        }
 
     fun String.possibleGame(): Int {
         val (gameId, rawSets) = split(":")
